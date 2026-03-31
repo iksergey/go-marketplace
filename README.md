@@ -1,5 +1,7 @@
 # Go Marketplace
 
+## ➡️ [Полное описание курса](https://iksergey.github.io/go-marketplace/) + [промокод](https://stepik.org/a/266408/pay?promo=dd9370c9066886a3&utm_source=github&utm_medium=readme&utm_campaign=stepik-go-course)
+
 Marketplace-проект на Go из финальной части `Go Master Course`. Репозиторий отражает этап курса, где приложение собирается в виде e-commerce платформы из нескольких сервисов с синхронным и асинхронным взаимодействием.
 
 ## Что внутри
