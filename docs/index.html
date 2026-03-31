@@ -1,0 +1,2580 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108250817', 'ym');
+
+    ym(108250817, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108250817" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<title>Go Master Course — От первой строчки до микросервисов | Stepik</title>
+<meta name="description" content="Go Master Course — полный курс по языку Go от первой строчки кода до микросервисной архитектуры. 300+ видеоуроков, 50 часов, gRPC, RabbitMQ, PostgreSQL, Redis, Prometheus, Grafana. Записывайтесь на Stepik.">
+<meta name="keywords" content="Go, Golang, курс Go, обучение Go, микросервисы, gRPC, RabbitMQ, PostgreSQL, Redis, Prometheus, Grafana, Go Master Course, Stepik, программирование на Go">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://go-master-course.ru/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Go Master Course — От первой строчки до микросервисов">
+<meta property="og:description" content="Полный курс по Go: 300+ видеоуроков, 3 реальных проекта, микросервисная архитектура с gRPC, RabbitMQ, PostgreSQL, Redis.">
+<meta property="og:url" content="https://go-master-course.ru/">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:site_name" content="Go Master Course">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Go Master Course — От первой строчки до микросервисов">
+<meta name="twitter:description" content="Полный курс по Go: 300+ видеоуроков, 3 реальных проекта, микросервисная архитектура.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "Go Master Course",
+  "description": "Полный курс по языку Go от первой строчки кода до микросервисной архитектуры с gRPC, RabbitMQ, PostgreSQL, Redis, Prometheus и Grafana.",
+  "provider": {
+    "@type": "Organization",
+    "name": "Stepik",
+    "sameAs": "https://stepik.org"
+  },
+  "offers": {
+    "@type": "Offer",
+    "url": "https://stepik.org/a/266408/pay?promo=dd9370c9066886a3&utm_source=landing&utm_medium=structured_data&utm_campaign=go_master_course",
+    "availability": "https://schema.org/InStock"
+  },
+  "hasCourseInstance": {
+    "@type": "CourseInstance",
+    "courseMode": "online",
+    "courseWorkload": "PT50H"
+  },
+  "inLanguage": "ru",
+  "numberOfCredits": "300+ видеоуроков"
+}
+</script>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #232738;
+    --surface3: #2a2e42;
+    --border: #2e3348;
+    --text: #e1e4ed;
+    --text-dim: #8b90a5;
+    --accent-blue: #5b8def;
+    --accent-cyan: #4ecdc4;
+    --accent-orange: #f7a44c;
+    --accent-pink: #e84393;
+    --accent-green: #55efc4;
+    --accent-purple: #a29bfe;
+    --accent-red: #ff6b6b;
+    --accent-yellow: #ffd93d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', 'Cascadia Code', monospace;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  /* ── Navigation ── */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(15, 17, 23, 0.88);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+    padding: 0 20px;
+    transition: box-shadow 0.3s;
+  }
+  .nav.scrolled {
+    box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+  }
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+  }
+  .nav-logo {
+    font-weight: 700;
+    font-size: 0.95rem;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    white-space: nowrap;
+  }
+  .nav-links {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+  .nav-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.7rem;
+    padding: 6px 10px;
+    border-radius: 6px;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .nav-links a:hover {
+    color: var(--text);
+    background: var(--surface2);
+  }
+
+  /* ── Hero ── */
+  .hero {
+    text-align: center;
+    padding: 130px 20px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 1200px;
+    height: 1200px;
+    background: radial-gradient(circle, rgba(91,141,239,0.08) 0%, rgba(78,205,196,0.05) 30%, rgba(85,239,196,0.02) 50%, transparent 70%);
+    pointer-events: none;
+    animation: heroPulse 8s ease-in-out infinite;
+  }
+  @keyframes heroPulse {
+    0%, 100% { opacity: 0.7; transform: translateX(-50%) scale(1); }
+    50% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    padding: 6px 20px;
+    border: 1px solid rgba(78,205,196,0.3);
+    border-radius: 20px;
+    font-size: 0.7rem;
+    color: var(--accent-cyan);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+    background: rgba(78,205,196,0.05);
+    animation: fadeInDown 0.8s ease-out;
+  }
+  .hero h1 {
+    font-size: 3.6rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan), var(--accent-green));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 20px;
+    line-height: 1.15;
+    animation: fadeInUp 0.8s ease-out 0.1s both;
+  }
+  .hero .tagline {
+    font-size: 1rem;
+    color: var(--text-dim);
+    max-width: 720px;
+    margin: 0 auto 20px;
+    line-height: 1.9;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+  }
+  .hero .tagline strong { color: var(--text); }
+  .hero .tagline em { color: var(--accent-cyan); font-style: normal; }
+
+  .hero-cta {
+    display: inline-flex;
+    gap: 14px;
+    margin-top: 20px;
+    animation: fadeInUp 0.8s ease-out 0.35s both;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 10px;
+    font-family: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.25s;
+    cursor: pointer;
+    border: none;
+    letter-spacing: 0.5px;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: var(--bg);
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(91,141,239,0.35);
+  }
+  .btn-outline {
+    border: 1px solid var(--border);
+    color: var(--text);
+    background: transparent;
+  }
+  .btn-outline:hover {
+    border-color: var(--accent-cyan);
+    background: rgba(78,205,196,0.05);
+    transform: translateY(-2px);
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ── Stats Bar ── */
+  .stats-bar {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    padding: 36px 20px;
+    margin: 0 auto;
+    max-width: 1100px;
+    animation: fadeInUp 0.8s ease-out 0.5s both;
+  }
+  .stat {
+    text-align: center;
+    min-width: 70px;
+  }
+  .stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.2;
+  }
+  .stat-label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 4px;
+  }
+
+  /* ── Section ── */
+  .section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 70px 20px;
+  }
+  .section.wide {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .section-header h2 {
+    font-size: 1.9rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+  .section-header .section-sub {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── Divider ── */
+  .divider {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+  .divider.wide { max-width: 100%; }
+
+  /* ── Terminal ── */
+  .terminal {
+    max-width: 700px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    background: var(--surface2);
+    border-bottom: 1px solid var(--border);
+  }
+  .terminal-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+  .terminal-body {
+    padding: 20px 24px;
+    font-size: 0.82rem;
+    line-height: 1.7;
+  }
+  .terminal-body .prompt { color: var(--accent-green); }
+  .terminal-body .cmd { color: var(--text); }
+  .terminal-body .output { color: var(--text-dim); }
+  .terminal-body .highlight { color: var(--accent-cyan); }
+  .terminal-body .kw { color: var(--accent-blue); }
+  .terminal-body .fn { color: var(--accent-cyan); }
+  .terminal-body .str { color: var(--accent-green); }
+  .terminal-body .cm { color: var(--text-dim); }
+  .terminal-body .tp { color: var(--accent-orange); }
+
+  /* ── Why Go Cards ── */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .why-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    transition: transform 0.2s, border-color 0.3s;
+  }
+  .why-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+  }
+  .why-card h4 { font-size: 0.88rem; margin-bottom: 8px; }
+  .why-card p { font-size: 0.75rem; color: var(--text-dim); line-height: 1.7; }
+
+  /* ── Value Props ── */
+  .value-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .value-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 26px;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+  .value-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+  }
+  .value-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .value-icon {
+    font-size: 1.6rem;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+  .value-card h3 { font-size: 0.95rem; margin-bottom: 8px; }
+  .value-card p { font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; }
+
+  /* ── Roadmap ── */
+  .roadmap {
+    position: relative;
+    padding-left: 40px;
+  }
+  .roadmap::before {
+    content: '';
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg,
+      var(--accent-blue),
+      var(--accent-cyan),
+      var(--accent-green),
+      var(--accent-orange),
+      var(--accent-pink),
+      var(--accent-purple)
+    );
+    border-radius: 2px;
+  }
+
+  .phase { position: relative; margin-bottom: 14px; }
+  .phase-dot {
+    position: absolute;
+    left: -33px;
+    top: 18px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 3px solid var(--accent-blue);
+    background: var(--bg);
+    transition: background 0.3s;
+  }
+
+  .day-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .day-card:hover { border-color: var(--accent-blue); }
+  .day-header {
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .day-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--bg);
+    background: var(--accent-blue);
+    padding: 4px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    min-width: 60px;
+    text-align: center;
+  }
+  .day-number.green { background: var(--accent-green); }
+  .day-number.orange { background: var(--accent-orange); }
+  .day-number.pink { background: var(--accent-pink); }
+  .day-number.purple { background: var(--accent-purple); }
+  .day-number.cyan { background: var(--accent-cyan); }
+  .day-number.yellow { background: var(--accent-yellow); color: #111; }
+  .day-number.red { background: var(--accent-red); }
+
+  .day-title { font-weight: 600; font-size: 0.92rem; flex: 1; }
+  .day-count { font-size: 0.72rem; color: var(--text-dim); white-space: nowrap; }
+  .day-chevron {
+    color: var(--text-dim);
+    transition: transform 0.3s;
+    font-size: 0.8rem;
+  }
+  .day-card.open .day-chevron { transform: rotate(90deg); }
+  .day-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out;
+    border-top: 1px solid transparent;
+  }
+  .day-card.open .day-body {
+    max-height: 800px;
+    border-top-color: var(--border);
+  }
+  .day-body-inner { padding: 0 20px 16px 20px; }
+
+  .ex-list { list-style: none; padding: 12px 0 0; }
+  .ex-list li {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    padding: 5px 0;
+    font-size: 0.8rem;
+    border-bottom: 1px solid rgba(46,51,72,0.4);
+  }
+  .ex-list li:last-child { border-bottom: none; }
+  .ex-id { color: var(--accent-cyan); font-weight: 600; min-width: 32px; font-size: 0.73rem; }
+  .ex-topic { color: var(--text); font-weight: 500; }
+  .ex-desc { color: var(--text-dim); font-size: 0.73rem; }
+
+  /* ── Phase Banner ── */
+  .phase-banner {
+    text-align: center;
+    padding: 50px 20px 20px;
+    position: relative;
+  }
+  .phase-label {
+    display: inline-block;
+    font-size: 0.68rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 20px;
+    margin-bottom: 14px;
+  }
+  .phase-banner h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .phase-banner p {
+    color: var(--text-dim);
+    font-size: 0.85rem;
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── Project Cards ── */
+  .project-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s;
+  }
+  .project-card:hover { border-color: var(--accent-blue); }
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .project-card.proj-green::before { background: linear-gradient(90deg, var(--accent-green), var(--accent-cyan)); }
+  .project-card.proj-orange::before { background: linear-gradient(90deg, var(--accent-orange), var(--accent-yellow)); }
+  .project-card.proj-pink::before { background: linear-gradient(90deg, var(--accent-pink), var(--accent-purple)); }
+
+  .two-col-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .project-card h3 { font-size: 1.15rem; margin-bottom: 8px; }
+  .project-card .proj-sub {
+    color: var(--text-dim);
+    font-size: 0.82rem;
+    margin-bottom: 18px;
+    line-height: 1.7;
+  }
+
+  /* ── Tags ── */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 14px;
+  }
+  .tag {
+    font-size: 0.68rem;
+    padding: 4px 10px;
+    border-radius: 5px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .tag.t-go { color: var(--accent-cyan); border-color: rgba(78,205,196,0.3); }
+  .tag.t-json { color: var(--accent-green); border-color: rgba(85,239,196,0.3); }
+  .tag.t-api { color: var(--accent-orange); border-color: rgba(247,164,76,0.3); }
+  .tag.t-db { color: var(--accent-blue); border-color: rgba(91,141,239,0.3); }
+  .tag.t-micro { color: var(--accent-pink); border-color: rgba(232,67,147,0.3); }
+
+  /* ── Code Block ── */
+  .code-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-top: 16px;
+    overflow-x: auto;
+  }
+  .code-block pre { font-size: 0.78rem; line-height: 1.6; }
+  .code-block .kw { color: var(--accent-blue); }
+  .code-block .fn { color: var(--accent-cyan); }
+  .code-block .str { color: var(--accent-green); }
+  .code-block .cm { color: var(--text-dim); }
+  .code-block .tp { color: var(--accent-orange); }
+
+  /* ── Arch Diagram ── */
+  .arch-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    margin-top: 18px;
+    overflow-x: auto;
+  }
+  .arch-diagram pre { font-size: 0.72rem; line-height: 1.5; color: var(--text-dim); }
+  .arch-diagram .hl-blue { color: var(--accent-blue); }
+  .arch-diagram .hl-green { color: var(--accent-green); }
+  .arch-diagram .hl-orange { color: var(--accent-orange); }
+  .arch-diagram .hl-pink { color: var(--accent-pink); }
+  .arch-diagram .hl-red { color: var(--accent-red); }
+  .arch-diagram .hl-cyan { color: var(--accent-cyan); }
+
+  /* ── Tech Evolution ── */
+  .evolution {
+    display: flex;
+    gap: 16px;
+    align-items: stretch;
+    margin-top: 24px;
+    flex-wrap: wrap;
+  }
+  .evo-step {
+    flex: 1;
+    min-width: 200px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+    transition: transform 0.2s, border-color 0.3s;
+  }
+  .evo-step:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+  }
+  .evo-step h4 { font-size: 0.85rem; margin-bottom: 10px; }
+  .evo-step ul { list-style: none; font-size: 0.75rem; color: var(--text-dim); }
+  .evo-step ul li { padding: 3px 0; }
+  .evo-step ul li::before { content: '>'; color: var(--accent-cyan); margin-right: 8px; }
+  .evo-arrow {
+    display: flex;
+    align-items: center;
+    color: var(--text-dim);
+    font-size: 1.4rem;
+  }
+
+  /* ── Docs Grid ── */
+  .docs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 12px;
+  }
+  .doc-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 14px 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .doc-item:hover { border-color: var(--accent-purple); transform: translateY(-2px); }
+  .doc-item h4 { font-size: 0.82rem; margin-bottom: 4px; }
+  .doc-item p { font-size: 0.72rem; color: var(--text-dim); }
+
+  /* ── Video Stats ── */
+  .video-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 30px;
+  }
+  .video-stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+    transition: transform 0.2s, border-color 0.3s;
+  }
+  .video-stat-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-cyan);
+  }
+  .video-stat-card .vsc-num {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .video-stat-card .vsc-label {
+    font-size: 0.72rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  /* ── Journey Timeline ── */
+  .journey {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 16px;
+  }
+  .journey-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.2s, border-color 0.3s;
+  }
+  .journey-card:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent-blue);
+  }
+  .journey-card h3 { font-size: 0.95rem; margin-bottom: 6px; }
+  .journey-card p {
+    font-size: 0.78rem;
+    color: var(--text-dim);
+    margin-top: 8px;
+    line-height: 1.7;
+  }
+
+  /* ── Marketplace Architecture ── */
+  .mp-stats {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 30px;
+  }
+  .mp-stat { text-align: center; }
+  .mp-stat-value {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+  }
+  .mp-stat-label {
+    font-size: 0.65rem;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .mp-legend {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    padding: 12px 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 0.68rem;
+    margin-bottom: 24px;
+    justify-content: center;
+  }
+  .mp-legend-item { display: flex; align-items: center; gap: 6px; color: var(--text-dim); }
+  .mp-legend-dot { width: 10px; height: 10px; border-radius: 3px; }
+  .mp-legend-line { width: 24px; height: 3px; border-radius: 2px; }
+  .mp-layer {
+    margin-bottom: 20px;
+  }
+  .mp-layer-title {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--text-dim);
+    margin-bottom: 12px;
+    padding-left: 10px;
+    border-left: 3px solid var(--accent-blue);
+  }
+  .mp-row {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .mp-service {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    width: 250px;
+    position: relative;
+    transition: all 0.3s;
+  }
+  .mp-service:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+  }
+  .mp-service::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 12px 12px 0 0;
+  }
+  .mp-service .svc-icon { font-size: 1.4rem; margin-bottom: 8px; }
+  .mp-service h4 { font-size: 0.95rem; margin-bottom: 3px; }
+  .mp-service .svc-proto { font-size: 0.68rem; color: var(--text-dim); margin-bottom: 8px; }
+  .mp-service .svc-port {
+    display: inline-block;
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 0.6rem;
+    margin-right: 3px;
+  }
+  .mp-service .svc-endpoints { margin-top: 8px; font-size: 0.7rem; color: var(--text-dim); line-height: 1.6; }
+  .mp-service .svc-endpoints code {
+    color: var(--accent-cyan);
+    background: rgba(78,205,196,0.1);
+    padding: 1px 5px;
+    border-radius: 3px;
+    font-size: 0.65rem;
+  }
+  .mp-infra {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 18px;
+    width: 170px;
+    text-align: center;
+    transition: all 0.3s;
+  }
+  .mp-infra:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  .mp-infra .inf-icon { font-size: 1.6rem; margin-bottom: 4px; }
+  .mp-infra h4 { font-size: 0.82rem; margin-bottom: 3px; }
+  .mp-infra .inf-detail { font-size: 0.65rem; color: var(--text-dim); }
+
+  .mp-comm-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+  }
+  .mp-comm-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .mp-comm-card h4 { font-size: 0.88rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+  .mp-comm-card p { font-size: 0.72rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 12px; }
+  .mp-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    padding: 10px 0;
+  }
+  .mp-flow-node {
+    padding: 10px 14px;
+    border-radius: 8px;
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-align: center;
+    min-width: 100px;
+  }
+  .mp-flow-arrow {
+    padding: 0 8px;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+  }
+  .mp-flow-arrow-label {
+    font-size: 0.58rem;
+    color: var(--text-dim);
+    text-align: center;
+    display: block;
+    margin-top: 2px;
+  }
+
+  .mp-patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 12px;
+    margin-top: 20px;
+  }
+  .mp-pattern {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .mp-pattern:hover { border-color: var(--accent-blue); transform: translateY(-2px); }
+  .mp-pattern h5 { font-size: 0.8rem; margin-bottom: 4px; }
+  .mp-pattern p { font-size: 0.68rem; color: var(--text-dim); line-height: 1.5; }
+
+  /* ── Audience Cards ── */
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .audience-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .audience-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+  }
+  .audience-card h4 { font-size: 0.9rem; margin-bottom: 8px; padding-left: 12px; }
+  .audience-card p { font-size: 0.78rem; color: var(--text-dim); line-height: 1.7; padding-left: 12px; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    padding: 60px 20px;
+    color: var(--text-dim);
+    font-size: 0.75rem;
+  }
+  .footer .footer-logo {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-weight: 700;
+  }
+  .footer .footer-sub { margin-top: 6px; }
+  .footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .footer .footer-links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.72rem;
+    transition: color 0.2s;
+  }
+  .footer .footer-links a:hover { color: var(--accent-cyan); }
+
+  /* ── Enroll CTA Button ── */
+  .btn-enroll {
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+    color: #fff;
+    font-weight: 700;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-enroll::after {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+    transform: translateX(-100%);
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+  .btn-enroll:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(247,164,76,0.4);
+  }
+
+  /* ── CTA Banner ── */
+  .cta-banner {
+    text-align: center;
+    padding: 70px 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-banner::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 800px; height: 800px;
+    background: radial-gradient(circle, rgba(247,164,76,0.06) 0%, rgba(232,67,147,0.04) 40%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-banner h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 14px;
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .cta-banner p {
+    color: var(--text-dim);
+    font-size: 0.88rem;
+    max-width: 550px;
+    margin: 0 auto 28px;
+    line-height: 1.7;
+  }
+  .cta-banner .btn-enroll {
+    padding: 16px 40px;
+    font-size: 0.95rem;
+  }
+
+  /* ── Nav enroll button ── */
+  .nav-enroll {
+    padding: 5px 14px;
+    border-radius: 6px;
+    font-size: 0.68rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: linear-gradient(135deg, var(--accent-orange), var(--accent-pink));
+    color: #fff;
+    text-decoration: none;
+    transition: all 0.2s;
+    white-space: nowrap;
+  }
+  .nav-enroll:hover {
+    box-shadow: 0 4px 15px rgba(247,164,76,0.35);
+    transform: translateY(-1px);
+  }
+
+  /* ── Mobile menu toggle ── */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--text-dim);
+    font-size: 1.4rem;
+    cursor: pointer;
+    padding: 8px;
+    line-height: 1;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* ── Helper: force single-column on mobile ── */
+  .mob-col-1 { /* applied via JS or class to override inline grids */ }
+
+  /* ── Responsive: Tablet (<=900px) ── */
+  @media (max-width: 900px) {
+    .evolution { flex-direction: column; }
+    .evo-arrow { display: none; }
+    .evo-step { min-width: 100%; }
+    .mp-service { width: 100%; }
+    .mp-comm-grid { grid-template-columns: 1fr; }
+    .docs-grid { grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); }
+  }
+
+  /* ── Responsive: Mobile (<=768px) ── */
+  @media (max-width: 768px) {
+    /* ─ Switch to system sans-serif on mobile for readability ─ */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      font-size: 15px;
+      -webkit-text-size-adjust: 100%;
+    }
+    /* Keep monospace only where needed */
+    .terminal-body, .code-block, .arch-diagram, .ex-id,
+    .svc-endpoints code, .mp-service .svc-endpoints code {
+      font-family: 'SF Mono', 'Fira Code', 'JetBrains Mono', monospace;
+    }
+
+    /* ─ Navigation ─ */
+    .nav { padding: 0 12px; }
+    .nav-toggle { display: block; }
+    .nav-links {
+      display: none;
+      position: absolute;
+      top: 52px;
+      left: 0;
+      right: 0;
+      background: rgba(15, 17, 23, 0.97);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 8px 12px 14px;
+      flex-direction: column;
+      gap: 0;
+    }
+    .nav-links.open { display: flex; }
+    .nav-links a {
+      font-size: 0.82rem;
+      padding: 12px 14px;
+      border-radius: 8px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ─ Hero ─ */
+    .hero { padding: 80px 16px 24px; }
+    .hero::before { width: 600px; height: 600px; top: -200px; }
+    .hero h1 { font-size: 1.75rem; line-height: 1.25; margin-bottom: 12px; }
+    .hero .tagline { font-size: 0.88rem; line-height: 1.65; margin-bottom: 10px; }
+    .hero .tagline br { display: none; }
+    .hero-badge { font-size: 0.6rem; letter-spacing: 1.5px; padding: 5px 12px; margin-bottom: 18px; }
+    .hero-cta { flex-direction: column; align-items: stretch; gap: 8px; margin-top: 14px; }
+    .btn { display: block; text-align: center; padding: 14px 20px; font-size: 0.88rem; }
+    .cta-banner { padding: 50px 16px; }
+    .cta-banner h2 { font-size: 1.4rem; }
+    .cta-banner p { font-size: 0.82rem; }
+    .cta-banner .btn-enroll { padding: 14px 28px; font-size: 0.88rem; display: block; }
+    .nav-enroll { display: none; }
+
+    /* ─ Stats bar: 2x4 grid ─ */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+      padding: 20px 16px;
+      max-width: 100%;
+    }
+    .stat { min-width: 0; }
+    .stat-value { font-size: 1.15rem; }
+    .stat-label { font-size: 0.55rem; letter-spacing: 0.5px; }
+
+    /* ─ Sections ─ */
+    .section { padding: 32px 14px; }
+    .section-header { margin-bottom: 24px; }
+    .section-header h2 { font-size: 1.3rem; }
+    .section-header .section-sub { font-size: 0.82rem; line-height: 1.5; }
+    .phase-banner { padding: 36px 14px 14px; }
+    .phase-banner h2 { font-size: 1.25rem; }
+    .phase-banner p { font-size: 0.82rem; line-height: 1.5; }
+    .phase-label { font-size: 0.62rem; letter-spacing: 2px; }
+
+    /* ─ All grids: single column ─ */
+    .value-grid,
+    .why-grid,
+    .audience-grid,
+    .journey,
+    .mp-patterns-grid,
+    .mp-comm-grid { grid-template-columns: 1fr; }
+    .docs-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .video-stats { grid-template-columns: 1fr 1fr; gap: 10px; }
+
+    /* ─ Cards ─ */
+    .value-card, .why-card, .audience-card, .journey-card { padding: 18px; }
+    .value-card h3, .why-card h4, .audience-card h4, .journey-card h3 { font-size: 0.92rem; }
+    .value-card p, .why-card p, .audience-card p, .journey-card p { font-size: 0.82rem; }
+    .value-icon { font-size: 1.2rem; margin-bottom: 8px; }
+
+    /* ─ Roadmap ─ */
+    .roadmap { padding-left: 24px; }
+    .roadmap::before { left: 7px; width: 2px; }
+    .phase-dot { left: -24px; width: 12px; height: 12px; top: 16px; border-width: 2px; }
+    .phase { margin-bottom: 10px; }
+    .day-card { border-radius: 10px; }
+    .day-header { padding: 12px 12px; gap: 8px; }
+    .day-number { font-size: 0.6rem; padding: 3px 6px; min-width: 44px; border-radius: 5px; }
+    .day-title { font-size: 0.85rem; }
+    .day-count { font-size: 0.68rem; display: none; }
+    .day-chevron { font-size: 0.7rem; }
+    .day-body-inner { padding: 0 12px 12px; }
+    .ex-list li {
+      flex-direction: column;
+      gap: 1px;
+      padding: 6px 0;
+      font-size: 0.8rem;
+    }
+    .ex-id { font-size: 0.7rem; min-width: unset; }
+    .ex-topic { font-size: 0.82rem; }
+    .ex-desc { font-size: 0.75rem; padding-left: 0; width: auto; }
+
+    /* ─ Project cards ─ */
+    .project-card { padding: 16px; border-radius: 12px; }
+    .project-card h3 { font-size: 1rem; }
+    .project-card .proj-sub { font-size: 0.82rem; }
+
+    /* ─ Architecture diagrams ─ */
+    .arch-diagram { padding: 12px; border-radius: 10px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .arch-diagram pre { font-size: 0.58rem; line-height: 1.35; white-space: pre; tab-size: 2; }
+
+    /* ─ Code / terminal ─ */
+    .terminal { border-radius: 10px; }
+    .terminal-body { padding: 14px 12px; }
+    .terminal-body pre { font-size: 0.72rem; line-height: 1.55; white-space: pre-wrap; word-break: break-all; }
+    .code-block { padding: 12px; border-radius: 10px; overflow-x: auto; }
+    .code-block pre { font-size: 0.7rem; white-space: pre-wrap; word-break: break-all; }
+
+    /* ─ Two-column grids forced to single ─ */
+    .two-col-grid {
+      grid-template-columns: 1fr;
+    }
+
+    /* ─ Tags ─ */
+    .tags { gap: 4px; }
+    .tag { font-size: 0.65rem; padding: 4px 8px; }
+
+    /* ─ Marketplace ─ */
+    .mp-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+    }
+    .mp-stat-value { font-size: 1rem; }
+    .mp-stat-label { font-size: 0.55rem; }
+    .mp-legend { font-size: 0.62rem; gap: 8px; padding: 10px 12px; flex-wrap: wrap; justify-content: flex-start; }
+    .mp-layer { margin-bottom: 16px; }
+    .mp-layer-title { font-size: 0.6rem; letter-spacing: 2px; margin-bottom: 10px; }
+    .mp-row { gap: 10px; }
+    .mp-service { width: 100%; padding: 14px; border-radius: 10px; }
+    .mp-service .svc-icon { font-size: 1.2rem; margin-bottom: 6px; }
+    .mp-service h4 { font-size: 0.9rem; }
+    .mp-service .svc-proto { font-size: 0.72rem; }
+    .mp-service .svc-endpoints { font-size: 0.72rem; }
+    .mp-service .svc-endpoints code { font-size: 0.65rem; }
+    .mp-service .svc-port { font-size: 0.58rem; }
+    .mp-infra {
+      width: calc(50% - 6px);
+      min-width: 0;
+      padding: 10px 8px;
+      border-radius: 10px;
+    }
+    .mp-infra .inf-icon { font-size: 1.3rem; }
+    .mp-infra h4 { font-size: 0.78rem; }
+    .mp-infra .inf-detail { font-size: 0.62rem; }
+
+    .mp-comm-card { padding: 14px; border-radius: 10px; }
+    .mp-comm-card h4 { font-size: 0.88rem; }
+    .mp-comm-card p { font-size: 0.78rem; }
+    .mp-flow { flex-wrap: wrap; gap: 4px; justify-content: center; }
+    .mp-flow-node { font-size: 0.68rem; padding: 8px 10px; min-width: 0; flex: 1; max-width: 120px; }
+    .mp-flow-arrow { padding: 0 3px; font-size: 0.7rem; }
+    .mp-flow-arrow-label { font-size: 0.55rem; }
+
+    .mp-pattern { padding: 14px; border-radius: 10px; }
+    .mp-pattern h5 { font-size: 0.82rem; }
+    .mp-pattern p { font-size: 0.75rem; }
+
+    /* ─ Evolution ─ */
+    .evolution { gap: 10px; }
+    .evo-step { padding: 16px; border-radius: 10px; }
+    .evo-step h4 { font-size: 0.85rem; }
+    .evo-step ul { font-size: 0.78rem; }
+
+    /* ─ Video stats ─ */
+    .video-stat-card { padding: 16px; border-radius: 10px; }
+    .video-stat-card .vsc-num { font-size: 1.5rem; }
+    .video-stat-card .vsc-label { font-size: 0.65rem; }
+
+    /* ─ Docs grid ─ */
+    .doc-item { padding: 10px 12px; }
+    .doc-item h4 { font-size: 0.8rem; }
+    .doc-item p { font-size: 0.7rem; }
+
+    /* ─ Footer ─ */
+    .footer { padding: 36px 14px; }
+    .footer .footer-logo { font-size: 0.95rem; }
+    .footer .footer-sub { font-size: 0.7rem; }
+
+    /* ─ Divider ─ */
+    .divider { margin-left: 14px; margin-right: 14px; }
+  }
+
+  /* ── Responsive: Small phones (<=420px) ── */
+  @media (max-width: 420px) {
+    .hero h1 { font-size: 1.5rem; }
+    .hero .tagline { font-size: 0.82rem; }
+    .stats-bar { grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 16px 10px; }
+    .stat-value { font-size: 1rem; }
+    .stat-label { font-size: 0.5rem; }
+    .section { padding: 24px 10px; }
+    .section-header h2 { font-size: 1.15rem; }
+    .phase-banner h2 { font-size: 1.1rem; }
+    .docs-grid { grid-template-columns: 1fr; }
+    .video-stats { grid-template-columns: 1fr 1fr; gap: 8px; }
+    .mp-stats { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+    .mp-infra { width: calc(50% - 5px); padding: 8px 6px; }
+    .mp-infra h4 { font-size: 0.7rem; }
+    .mp-infra .inf-detail { font-size: 0.58rem; }
+    .day-number { font-size: 0.55rem; min-width: 38px; padding: 2px 5px; }
+    .day-title { font-size: 0.8rem; }
+    .arch-diagram pre { font-size: 0.5rem; }
+    .terminal-body pre { font-size: 0.65rem; }
+    .roadmap { padding-left: 20px; }
+    .roadmap::before { left: 5px; }
+    .phase-dot { left: -21px; width: 10px; height: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ NAVIGATION ═══════════════ -->
+<nav class="nav" id="navbar">
+  <div class="nav-inner">
+    <div class="nav-logo">Go Master Course</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Menu">&#9776;</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#why">Почему Go</a>
+      <a href="#learn">Навыки</a>
+      <a href="#fundamentals">Программа</a>
+      <a href="#contact-book">CLI</a>
+      <a href="#api">REST API</a>
+      <a href="#marketplace">Marketplace</a>
+      <a href="#book">Конспекты</a>
+      <a href="#stack">Стек</a>
+    </div>
+    <a href="https://stepik.org/a/266408/pay?promo=dd9370c9066886a3&utm_source=landing&utm_medium=nav_button&utm_campaign=go_master_course" class="nav-enroll" target="_blank" rel="noopener">Записаться</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-badge">from zero to microservices</div>
+  <h1>Go Master Course</h1>
+  <p class="tagline">
+    Полный путь от <strong>первой строчки кода</strong> до <strong>распределённой микросервисной архитектуры</strong>
+    с gRPC, RabbitMQ, PostgreSQL, Redis, Prometheus и Grafana.
+    <br><br>
+    <em>300+ видеоуроков</em> &middot; <em>50 часов</em> &middot; <em>261 тест</em> &middot; <em>3 реальных проекта</em>
+  </p>
+
+  <div class="hero-cta">
+    <a href="https://stepik.org/a/266408/pay?promo=dd9370c9066886a3&utm_source=landing&utm_medium=hero_button&utm_campaign=go_master_course" class="btn btn-enroll" target="_blank" rel="noopener">Записаться на курс</a>
+    <a href="#fundamentals" class="btn btn-primary">Программа курса</a>
+    <a href="#marketplace" class="btn btn-outline">Финальный проект</a>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-value">300+</div><div class="stat-label">Видеоуроков</div></div>
+  <div class="stat"><div class="stat-value">50+</div><div class="stat-label">Часов видео</div></div>
+  <div class="stat"><div class="stat-value">261</div><div class="stat-label">Тестов</div></div>
+  <div class="stat"><div class="stat-value">45</div><div class="stat-label">Задач</div></div>
+  <div class="stat"><div class="stat-value">3</div><div class="stat-label">Проекта</div></div>
+  <div class="stat"><div class="stat-value">14</div><div class="stat-label">Дней теории</div></div>
+  <div class="stat"><div class="stat-value">10000+</div><div class="stat-label">Строк кода</div></div>
+  <div class="stat"><div class="stat-value">12+</div><div class="stat-label">Технологий</div></div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ FIRST CODE ═══════════════ -->
+<section class="section reveal">
+  <div class="section-header">
+    <h2>Путь начинается здесь</h2>
+    <p class="section-sub">Первый файл курса. Через 14 дней вы будете писать микросервисы</p>
+  </div>
+  <div class="terminal">
+    <div class="terminal-bar">
+      <div class="terminal-dot" style="background: var(--accent-red);"></div>
+      <div class="terminal-dot" style="background: var(--accent-yellow);"></div>
+      <div class="terminal-dot" style="background: var(--accent-green);"></div>
+      <span style="flex:1; text-align: center; font-size: 0.7rem; color: var(--text-dim);">all/src/day01/ex01datatypes/main.go</span>
+    </div>
+    <div class="terminal-body">
+<pre><span class="kw">package</span> main
+
+<span class="kw">import</span> <span class="str">"fmt"</span>
+
+<span class="kw">func</span> <span class="fn">main</span>() {
+    <span class="cm">// Day 01: first steps with Go types</span>
+    <span class="kw">var</span> name <span class="tp">string</span> = <span class="str">"Go Master Course"</span>
+    <span class="kw">var</span> days <span class="tp">int</span> = 14
+    <span class="kw">var</span> ready <span class="tp">bool</span> = <span class="kw">true</span>
+
+    fmt.<span class="fn">Printf</span>(<span class="str">"Course: %s\n"</span>, name)
+    fmt.<span class="fn">Printf</span>(<span class="str">"Days: %d, Ready: %t\n"</span>, days, ready)
+}</pre>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ WHY GO ═══════════════ -->
+<section class="section reveal" id="why">
+  <div class="section-header">
+    <h2 style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Почему Go?
+    </h2>
+    <p class="section-sub">Go создан в Google для масштабных систем. Простой синтаксис, молниеносная компиляция и встроенная конкурентность делают его идеальным для backend</p>
+  </div>
+
+  <div class="why-grid">
+    <div class="why-card" style="border-top: 3px solid var(--accent-cyan);">
+      <h4 style="color: var(--accent-cyan);">Простота и скорость</h4>
+      <p>Минимальный синтаксис, мгновенная компиляция в нативный бинарник. Нет классов, наследования, исключений &mdash; только то, что нужно</p>
+    </div>
+    <div class="why-card" style="border-top: 3px solid var(--accent-green);">
+      <h4 style="color: var(--accent-green);">Встроенная конкурентность</h4>
+      <p>Горутины и каналы &mdash; легковесные потоки из коробки. Тысячи конкурентных задач без боли</p>
+    </div>
+    <div class="why-card" style="border-top: 3px solid var(--accent-orange);">
+      <h4 style="color: var(--accent-orange);">Стандартная библиотека</h4>
+      <p>HTTP-сервер, JSON, криптография, тестирование &mdash; всё встроено. Минимум внешних зависимостей</p>
+    </div>
+    <div class="why-card" style="border-top: 3px solid var(--accent-pink);">
+      <h4 style="color: var(--accent-pink);">Востребованность</h4>
+      <p>Docker, Kubernetes, Terraform, Prometheus &mdash; вся cloud-инфраструктура написана на Go. Один из самых высокооплачиваемых языков</p>
+    </div>
+    <div class="why-card" style="border-top: 3px solid var(--accent-purple);">
+      <h4 style="color: var(--accent-purple);">Идеален для микросервисов</h4>
+      <p>Маленькие бинарники, мгновенный старт, низкое потребление памяти. Создан для контейнеров и облака</p>
+    </div>
+    <div class="why-card" style="border-top: 3px solid var(--accent-yellow);">
+      <h4 style="color: var(--accent-yellow);">Generics (Go 1.18+)</h4>
+      <p>Типобезопасное обобщённое программирование. Go стал ещё мощнее, не потеряв простоту</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ FOR WHOM ═══════════════ -->
+<section class="section reveal" id="audience">
+  <div class="section-header">
+    <h2>Для кого этот курс</h2>
+    <p class="section-sub">Курс подходит как новичкам, так и разработчикам, переходящим на Go с других языков</p>
+  </div>
+
+  <div class="audience-grid">
+    <div class="audience-card" style="border-left: 3px solid var(--accent-cyan);">
+      <h4 style="color: var(--accent-cyan);">Начинающим разработчикам</h4>
+      <p>Курс начинается с абсолютных основ: типы данных, переменные, условия, циклы. Каждый день &mdash; новая тема с десятками упражнений</p>
+    </div>
+    <div class="audience-card" style="border-left: 3px solid var(--accent-orange);">
+      <h4 style="color: var(--accent-orange);">Переходящим с Python / JS / Java</h4>
+      <p>Интенсивное погружение в Go-way: композиция вместо наследования, горутины вместо async/await, интерфейсы без implements</p>
+    </div>
+    <div class="audience-card" style="border-left: 3px solid var(--accent-green);">
+      <h4 style="color: var(--accent-green);">Тем, кто хочет в backend</h4>
+      <p>От консольных утилит до распределённых микросервисов: REST API, gRPC, очереди сообщений, базы данных, мониторинг</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ WHAT YOU'LL LEARN ═══════════════ -->
+<section class="section reveal" id="learn">
+  <div class="section-header">
+    <h2>Что вы освоите</h2>
+    <p class="section-sub">Полный набор навыков для backend-разработчика на Go</p>
+  </div>
+
+  <div class="value-grid">
+    <div class="value-card" style="border-top: 2px solid var(--accent-blue);">
+      <div class="value-icon" style="color: var(--accent-blue);">01</div>
+      <h3>Основы языка Go</h3>
+      <p>Типы данных, переменные, условия, циклы, функции, коллекции &mdash; крепкий фундамент для всего остального</p>
+    </div>
+    <div class="value-card" style="border-top: 2px solid var(--accent-cyan);">
+      <div class="value-icon" style="color: var(--accent-cyan);">02</div>
+      <h3>Структуры и интерфейсы</h3>
+      <p>ООП на Go: композиция вместо наследования, полиморфизм через интерфейсы, generics (Go 1.18+)</p>
+    </div>
+    <div class="value-card" style="border-top: 2px solid var(--accent-green);">
+      <div class="value-icon" style="color: var(--accent-green);">03</div>
+      <h3>Конкурентность</h3>
+      <p>Горутины, каналы, WaitGroup, Mutex &mdash; настоящая параллельная обработка данных</p>
+    </div>
+    <div class="value-card" style="border-top: 2px solid var(--accent-orange);">
+      <div class="value-icon" style="color: var(--accent-orange);">04</div>
+      <h3>SOLID и паттерны</h3>
+      <p>5 принципов SOLID + Factory, Builder, Singleton, Adapter, Prototype, Functional Options</p>
+    </div>
+    <div class="value-card" style="border-top: 2px solid var(--accent-pink);">
+      <div class="value-icon" style="color: var(--accent-pink);">05</div>
+      <h3>REST API и JWT</h3>
+      <p>Gin framework, middleware, аутентификация, авторизация, валидация, SQL-базы данных</p>
+    </div>
+    <div class="value-card" style="border-top: 2px solid var(--accent-purple);">
+      <div class="value-icon" style="color: var(--accent-purple);">06</div>
+      <h3>Микросервисы</h3>
+      <p>gRPC, RabbitMQ, Redis, PostgreSQL, MySQL &mdash; распределённая архитектура с observability</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ COURSE CONTENT STATS ═══════════════ -->
+<section class="section reveal">
+  <div class="section-header">
+    <h2>Объём материала</h2>
+    <p class="section-sub">Один из самых полных русскоязычных курсов по Go</p>
+  </div>
+
+  <div class="video-stats">
+    <div class="video-stat-card">
+      <div class="vsc-num" style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">300+</div>
+      <div class="vsc-label">Видеоуроков</div>
+    </div>
+    <div class="video-stat-card">
+      <div class="vsc-num" style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">50+ часов</div>
+      <div class="vsc-label">Видеоконтента</div>
+    </div>
+    <div class="video-stat-card">
+      <div class="vsc-num" style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">261</div>
+      <div class="vsc-label">Тестов</div>
+    </div>
+    <div class="video-stat-card">
+      <div class="vsc-num" style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">45</div>
+      <div class="vsc-label">Интерактивных задач</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ PHASE 1: FUNDAMENTALS ═══════════════ -->
+<section class="section reveal" id="fundamentals">
+  <div class="phase-banner">
+    <div class="phase-label" style="background: rgba(91,141,239,0.15); color: var(--accent-blue); border: 1px solid rgba(91,141,239,0.3);">
+      Фаза 1
+    </div>
+    <h2 style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Основы языка Go
+    </h2>
+    <p>14 дней интенсива, 86+ упражнений: от типов данных и переменных до конкурентности, SOLID и паттернов проектирования. Каждый день &mdash; новая тема с практическими заданиями</p>
+  </div>
+
+  <div class="roadmap">
+
+    <!-- Day 01 -->
+    <div class="phase">
+      <div class="phase-dot"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number">Day 01</span>
+          <span class="day-title">Типы данных и переменные</span>
+          <span class="day-count">9 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Типы данных</span><span class="ex-desc"> &mdash; int, float, bool, string, byte, rune</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Расширенные типы</span><span class="ex-desc"> &mdash; signed/unsigned, complex, числовые типы</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Анатомия переменной</span><span class="ex-desc"> &mdash; значение, тип, адрес, размер в памяти</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Хранение в памяти</span><span class="ex-desc"> &mdash; адреса и размеры разных типов</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Идентификаторы</span><span class="ex-desc"> &mdash; правила именования, Unicode, ключевые слова</span></li>
+            <li><span class="ex-id">ex06</span><span class="ex-topic">Naming conventions</span><span class="ex-desc"> &mdash; camelCase, public/private, сокращения</span></li>
+            <li><span class="ex-id">ex07</span><span class="ex-topic">Комментарии</span><span class="ex-desc"> &mdash; однострочные, многострочные, GoDoc</span></li>
+            <li><span class="ex-id">ex08</span><span class="ex-topic">Статическая типизация</span><span class="ex-desc"> &mdash; фиксация типов, type inference</span></li>
+            <li><span class="ex-id">ex09</span><span class="ex-topic">Нулевые значения</span><span class="ex-desc"> &mdash; zero values для всех типов</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 02 -->
+    <div class="phase">
+      <div class="phase-dot"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number">Day 02</span>
+          <span class="day-title">Операторы и форматирование</span>
+          <span class="day-count">5 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Арифметические операции</span><span class="ex-desc"> &mdash; +, -, *, /, %, битовые, инкремент</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Форматирование строк</span><span class="ex-desc"> &mdash; Print, Println, Printf, Sprintf</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Числовое форматирование</span><span class="ex-desc"> &mdash; ширина поля, выравнивание, точность</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Константы и iota</span><span class="ex-desc"> &mdash; const, typed/untyped, iota-последовательности</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Tip Calculator</span><span class="ex-desc"> &mdash; первый практический мини-проект</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 03 -->
+    <div class="phase">
+      <div class="phase-dot"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number">Day 03</span>
+          <span class="day-title">Math, типы и пользовательский ввод</span>
+          <span class="day-count">9 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Пакет math</span><span class="ex-desc"> &mdash; округление, степени, корни, тригонометрия</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Type alias</span><span class="ex-desc"> &mdash; создание псевдонимов и отдельных типов</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Приведение типов</span><span class="ex-desc"> &mdash; explicit conversion, потеря точности, overflow</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Ввод: fmt.Scanln</span><span class="ex-desc"> &mdash; базовый ввод пользователя</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Ввод: fmt.Scanf</span><span class="ex-desc"> &mdash; форматированный ввод с разделителями</span></li>
+            <li><span class="ex-id">ex06</span><span class="ex-topic">Tip Calculator v2</span><span class="ex-desc"> &mdash; интерактивный калькулятор с валидацией</span></li>
+            <li><span class="ex-id">ex07</span><span class="ex-topic">Бонус</span><span class="ex-desc"> &mdash; дополнительная практика ввода/вычислений</span></li>
+            <li><span class="ex-id">ex08</span><span class="ex-topic">Сравнение Scan*</span><span class="ex-desc"> &mdash; Scan vs Scanln vs Scanf</span></li>
+            <li><span class="ex-id">ex09</span><span class="ex-topic">bufio.Scanner</span><span class="ex-desc"> &mdash; чтение полных строк с пробелами</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 04 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-green);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number green">Day 04</span>
+          <span class="day-title">Условная логика</span>
+          <span class="day-count">6 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Сравнение</span><span class="ex-desc"> &mdash; ==, !=, &lt;, &gt;, &lt;=, &gt;=</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Логические операторы</span><span class="ex-desc"> &mdash; &amp;&amp;, ||, !, short-circuit</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">if / else</span><span class="ex-desc"> &mdash; ветвления, вложенные условия, цепочки</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">if с инициализацией</span><span class="ex-desc"> &mdash; объявление переменных прямо в if</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Tip Calculator v3</span><span class="ex-desc"> &mdash; обработка ошибок и буферизованный I/O</span></li>
+            <li><span class="ex-id">ex06</span><span class="ex-topic">switch</span><span class="ex-desc"> &mdash; case matching, fallthrough, без break</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 05 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-green);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number green">Day 05</span>
+          <span class="day-title">Циклы и случайные числа</span>
+          <span class="day-count">5 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">math/rand</span><span class="ex-desc"> &mdash; генерация чисел, бросок кубика, диапазоны</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">crypto/rand</span><span class="ex-desc"> &mdash; криптографическая случайность</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Классический for</span><span class="ex-desc"> &mdash; init; condition; post, вложенные циклы</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">for как while</span><span class="ex-desc"> &mdash; цикл с условием, обратный отсчёт</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">for-range</span><span class="ex-desc"> &mdash; итерация по строкам, rune, index/value</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 06 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-cyan);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number cyan">Day 06</span>
+          <span class="day-title">Коллекции: массивы, слайсы, строки</span>
+          <span class="day-count">10 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Массивы</span><span class="ex-desc"> &mdash; фиксированный размер, инициализация</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">2D-массивы</span><span class="ex-desc"> &mdash; крестики-нолики, таблица умножения</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Слайсы</span><span class="ex-desc"> &mdash; динамические массивы, pointer/len/cap, make()</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Операции со слайсами</span><span class="ex-desc"> &mdash; генерация, фильтрация, реверс</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Строки: основы</span><span class="ex-desc"> &mdash; UTF-8, raw strings, внутреннее устройство</span></li>
+            <li><span class="ex-id">ex06</span><span class="ex-topic">Строковые операции</span><span class="ex-desc"> &mdash; поиск, сравнение, пакет strings</span></li>
+            <li><span class="ex-id">ex07</span><span class="ex-topic">Паттерны строк</span><span class="ex-desc"> &mdash; конвертации int/float/string</span></li>
+            <li><span class="ex-id">ex08</span><span class="ex-topic">Quiz-приложение</span><span class="ex-desc"> &mdash; массив вопросов, подсчёт баллов</span></li>
+            <li><span class="ex-id">ex09</span><span class="ex-topic">Password Validator</span><span class="ex-desc"> &mdash; upper/lower, цифры, спецсимволы</span></li>
+            <li><span class="ex-id">ex10</span><span class="ex-topic">Шифр Цезаря</span><span class="ex-desc"> &mdash; ротация алфавита, Unicode, регистр</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 07 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-cyan);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number cyan">Day 07</span>
+          <span class="day-title">Maps и функции</span>
+          <span class="day-count">7 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Maps</span><span class="ex-desc"> &mdash; создание, доступ, nil vs empty, итерация</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Set через map</span><span class="ex-desc"> &mdash; map[T]struct{}, объединение, пересечение</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Библиотека</span><span class="ex-desc"> &mdash; система управления книгами: слайсы + maps</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Введение в функции</span><span class="ex-desc"> &mdash; рефакторинг, DRY-принцип</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Основы функций</span><span class="ex-desc"> &mdash; параметры, возвраты, variadic, рекурсия</span></li>
+            <li><span class="ex-id">ex06</span><span class="ex-topic">Продвинутые функции</span><span class="ex-desc"> &mdash; by value vs pointer, defer</span></li>
+            <li><span class="ex-id">ex07</span><span class="ex-topic">Panic и recover</span><span class="ex-desc"> &mdash; паника, размотка стека, восстановление</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 08 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-orange);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number orange">Day 08</span>
+          <span class="day-title">Файлы и время</span>
+          <span class="day-count">4 упражнения</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex00</span><span class="ex-topic">Основы файлов</span><span class="ex-desc"> &mdash; создание, запись, форматирование данных</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Пакет time</span><span class="ex-desc"> &mdash; текущее время, timestamps, форматирование</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Файловые операции</span><span class="ex-desc"> &mdash; открытие, чтение, запись, буферизация</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Библиотека + файлы</span><span class="ex-desc"> &mdash; персистенция, 3-layer architecture</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 09 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-orange);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number orange">Day 09</span>
+          <span class="day-title">Структуры и JSON</span>
+          <span class="day-count">4 упражнения</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Введение в struct</span><span class="ex-desc"> &mdash; определение, поля, методы-ресиверы</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Struct с методами</span><span class="ex-desc"> &mdash; доступ к полям, определение поведения</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Вложенные структуры</span><span class="ex-desc"> &mdash; embedding, организация данных</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Контакты + JSON</span><span class="ex-desc"> &mdash; struct tags, Marshal/Unmarshal</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 10 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-purple);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number purple">Day 10</span>
+          <span class="day-title">ООП: композиция, интерфейсы, generics</span>
+          <span class="day-count">12 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Композиция</span><span class="ex-desc"> &mdash; embedding структур, продвижение методов</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Видимость</span><span class="ex-desc"> &mdash; exported vs unexported, инкапсуляция</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Методы</span><span class="ex-desc"> &mdash; value vs pointer receivers, method sets</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Введение в интерфейсы</span><span class="ex-desc"> &mdash; контракты, множественные реализации</span></li>
+            <li><span class="ex-id">ex06</span><span class="ex-topic">Имплементация</span><span class="ex-desc"> &mdash; неявное удовлетворение, полиморфизм</span></li>
+            <li><span class="ex-id">ex07</span><span class="ex-topic">Type assertion</span><span class="ex-desc"> &mdash; определение типа, type switch</span></li>
+            <li><span class="ex-id">ex09</span><span class="ex-topic">interface{}</span><span class="ex-desc"> &mdash; пустой интерфейс, any</span></li>
+            <li><span class="ex-id">ex10</span><span class="ex-topic">nil interface</span><span class="ex-desc"> &mdash; подводные камни nil-интерфейсов</span></li>
+            <li><span class="ex-id">ex11</span><span class="ex-topic">Generics: основы</span><span class="ex-desc"> &mdash; типовые параметры, constraints</span></li>
+            <li><span class="ex-id">ex12</span><span class="ex-topic">Generics: продвинутые</span><span class="ex-desc"> &mdash; generic collections, map-reduce</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 11 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-green);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number green">Day 11</span>
+          <span class="day-title">Практический проект: Contact Book</span>
+          <span class="day-count">капстоун</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <p style="font-size: 0.82rem; color: var(--text-dim); padding-top: 12px; line-height: 1.7;">
+            Первый полноценный проект &mdash; применяем всё изученное за 10 дней.
+            Консольное приложение с доменной моделью, JSON-хранилищем, CLI-меню и валидацией.
+            <br><strong style="color: var(--accent-green);">25 уроков пошаговой разработки</strong>
+          </p>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 12 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-pink);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number pink">Day 12</span>
+          <span class="day-title">Конкурентность: горутины и каналы</span>
+          <span class="day-count">10 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Горутины: основы</span><span class="ex-desc"> &mdash; запуск конкурентных функций</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Стек горутин</span><span class="ex-desc"> &mdash; стеки и порядок выполнения</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Каналы: основы</span><span class="ex-desc"> &mdash; отправка/получение, синхронизация</span></li>
+            <li><span class="ex-id">ex04</span><span class="ex-topic">Буферизованные каналы</span><span class="ex-desc"> &mdash; ёмкость, неблокирующие операции</span></li>
+            <li><span class="ex-id">ex05</span><span class="ex-topic">Ошибки в горутинах</span><span class="ex-desc"> &mdash; Result struct, проброс ошибок</span></li>
+            <li><span class="ex-id">ex07</span><span class="ex-topic">WaitGroup</span><span class="ex-desc"> &mdash; Add/Done/Wait, синхронизация группы</span></li>
+            <li><span class="ex-id">ex08</span><span class="ex-topic">Mutex</span><span class="ex-desc"> &mdash; защита shared data, data race</span></li>
+            <li><span class="ex-id">ex09</span><span class="ex-topic">Concurrent Fetcher</span><span class="ex-desc"> &mdash; параллельные HTTP-запросы</span></li>
+            <li><span class="ex-id">ex10</span><span class="ex-topic">Deadlock</span><span class="ex-desc"> &mdash; сценарии взаимоблокировки</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 13 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-purple);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number purple">Day 13</span>
+          <span class="day-title">SOLID и паттерны проектирования</span>
+          <span class="day-count">11 упражнений</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <p style="font-size: 0.72rem; color: var(--accent-cyan); padding: 8px 0 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">SOLID Principles</p>
+          <ul class="ex-list">
+            <li><span class="ex-id">SRP</span><span class="ex-topic">Single Responsibility</span><span class="ex-desc"> &mdash; одна структура, одна ответственность</span></li>
+            <li><span class="ex-id">OCP</span><span class="ex-topic">Open/Closed</span><span class="ex-desc"> &mdash; расширение без изменения</span></li>
+            <li><span class="ex-id">LSP</span><span class="ex-topic">Liskov Substitution</span><span class="ex-desc"> &mdash; корректная подстановка</span></li>
+            <li><span class="ex-id">ISP</span><span class="ex-topic">Interface Segregation</span><span class="ex-desc"> &mdash; тонкие интерфейсы</span></li>
+            <li><span class="ex-id">DIP</span><span class="ex-topic">Dependency Inversion</span><span class="ex-desc"> &mdash; зависимость от абстракций</span></li>
+          </ul>
+          <p style="font-size: 0.72rem; color: var(--accent-orange); padding: 14px 0 4px; text-transform: uppercase; letter-spacing: 1px; font-weight: 600;">Design Patterns</p>
+          <ul class="ex-list">
+            <li><span class="ex-id">01</span><span class="ex-topic">Simple Factory</span><span class="ex-desc"> &mdash; порождающий: создание с валидацией</span></li>
+            <li><span class="ex-id">02</span><span class="ex-topic">Functional Options</span><span class="ex-desc"> &mdash; идиоматический Go: гибкая конфигурация</span></li>
+            <li><span class="ex-id">03</span><span class="ex-topic">Builder</span><span class="ex-desc"> &mdash; пошаговое построение сложных объектов</span></li>
+            <li><span class="ex-id">04</span><span class="ex-topic">Prototype</span><span class="ex-desc"> &mdash; клонирование объектов</span></li>
+            <li><span class="ex-id">05</span><span class="ex-topic">Singleton</span><span class="ex-desc"> &mdash; единственный экземпляр (sync.Once)</span></li>
+            <li><span class="ex-id">06</span><span class="ex-topic">Adapter</span><span class="ex-desc"> &mdash; совместимость несовместимых интерфейсов</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+    <!-- Day 14 -->
+    <div class="phase">
+      <div class="phase-dot" style="border-color: var(--accent-yellow);"></div>
+      <div class="day-card" onclick="this.classList.toggle('open')">
+        <div class="day-header">
+          <span class="day-number yellow">Day 14</span>
+          <span class="day-title">Управление зависимостями</span>
+          <span class="day-count">go modules</span>
+          <span class="day-chevron">&#9654;</span>
+        </div>
+        <div class="day-body"><div class="day-body-inner">
+          <ul class="ex-list">
+            <li><span class="ex-id">ex01</span><span class="ex-topic">Go Modules</span><span class="ex-desc"> &mdash; go.mod, go.sum, go get, go mod tidy</span></li>
+            <li><span class="ex-id">ex02</span><span class="ex-topic">Внешние пакеты</span><span class="ex-desc"> &mdash; pkg.go.dev, импорт и использование</span></li>
+            <li><span class="ex-id">ex03</span><span class="ex-topic">Создание библиотек</span><span class="ex-desc"> &mdash; публикация своего модуля</span></li>
+          </ul>
+        </div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ PHASE 2: CONTACT BOOK PROJECT ═══════════════ -->
+<section class="section reveal" id="contact-book">
+  <div class="phase-banner">
+    <div class="phase-label" style="background: rgba(85,239,196,0.15); color: var(--accent-green); border: 1px solid rgba(85,239,196,0.3);">
+      Фаза 2
+    </div>
+    <h2 style="background: linear-gradient(135deg, var(--accent-green), var(--accent-cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Contact Book CLI
+    </h2>
+    <p>Первый полноценный проект: консольная телефонная книга с иерархическими связями, тегами и JSON-хранилищем. 25 уроков пошаговой разработки, где применяется всё изученное за первые 10 дней</p>
+  </div>
+
+  <div class="project-card proj-green">
+    <h3>ContactBook &mdash; консольное приложение</h3>
+    <p class="proj-sub">
+      Полнофункциональная система управления контактами с поддержкой множественных телефонов и email,
+      тегов для поиска, заметок и связей между контактами (семья, коллеги, друзья).
+      Данные атомарно сохраняются в JSON. Каскадное удаление связей.
+    </p>
+
+    <div class="arch-diagram">
+      <pre>
+  <span class="hl-green">go-contact-book/</span>
+  |-- <span class="hl-cyan">cmd/contactbook/</span>
+  |   |-- main.go              <span class="hl-blue">// точка входа, инициализация</span>
+  |   +-- data/
+  |       |-- contacts.json    <span class="hl-blue">// персистентные данные</span>
+  |       +-- seed.json        <span class="hl-blue">// демо-данные</span>
+  |
+  +-- <span class="hl-orange">internal/</span>
+      |-- <span class="hl-cyan">app/</span>
+      |   +-- app.go           <span class="hl-blue">// Application struct, DI</span>
+      |-- <span class="hl-cyan">cli/</span>
+      |   |-- cli.go           <span class="hl-blue">// CLI-контроллер</span>
+      |   |-- handlers.go      <span class="hl-blue">// обработчики команд</span>
+      |   +-- menu.go          <span class="hl-blue">// интерактивное меню</span>
+      |-- <span class="hl-cyan">domain/</span>
+      |   |-- contact.go       <span class="hl-blue">// модель Contact</span>
+      |   |-- contactbook.go   <span class="hl-blue">// бизнес-логика: CRUD, поиск</span>
+      |   +-- errors.go        <span class="hl-blue">// доменные ошибки</span>
+      +-- <span class="hl-cyan">storage/</span>
+          |-- storage.go       <span class="hl-blue">// интерфейс Storage</span>
+          +-- json_storage.go  <span class="hl-blue">// JSON + atomic write</span></pre>
+    </div>
+
+    <div class="two-col-grid">
+      <div>
+        <h4 style="font-size: 0.82rem; margin-bottom: 10px; color: var(--accent-green);">Возможности</h4>
+        <div style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.8;">
+          &gt; CRUD контактов (Create, Read, Update, Delete)<br>
+          &gt; Множественные телефоны и email<br>
+          &gt; Теги для категоризации и поиска<br>
+          &gt; Связи между контактами<br>
+          &gt; Поиск по имени, телефону, тегам<br>
+          &gt; Каскадное удаление связей<br>
+          &gt; Атомарная запись в JSON
+        </div>
+      </div>
+      <div>
+        <h4 style="font-size: 0.82rem; margin-bottom: 10px; color: var(--accent-cyan);">Применённые концепции</h4>
+        <div style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.8;">
+          &gt; Структуры и методы<br>
+          &gt; Слайсы и Maps<br>
+          &gt; Файловый I/O и JSON<br>
+          &gt; Интерфейсы и полиморфизм<br>
+          &gt; Обработка ошибок<br>
+          &gt; Domain-Driven Design<br>
+          &gt; Repository Pattern
+        </div>
+      </div>
+    </div>
+
+    <div class="tags">
+      <span class="tag t-go">Go</span>
+      <span class="tag t-json">JSON Storage</span>
+      <span class="tag">CLI Menu</span>
+      <span class="tag">Domain-Driven Design</span>
+      <span class="tag">Repository Pattern</span>
+      <span class="tag">CRUD</span>
+      <span class="tag">Atomic Writes</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider wide"></div>
+
+<!-- ═══════════════ PHASE 3: CONTACTS REST API ═══════════════ -->
+<section class="section wide reveal" id="api">
+  <div class="phase-banner">
+    <div class="phase-label" style="background: rgba(247,164,76,0.15); color: var(--accent-orange); border: 1px solid rgba(247,164,76,0.3);">
+      Фаза 3
+    </div>
+    <h2 style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-yellow)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Contacts REST API
+    </h2>
+    <p>Переход от CLI к Web. Полноценный RESTful API с JWT-аутентификацией,
+    owner-based авторизацией, SQLite и чистой архитектурой. 29 уроков разработки</p>
+  </div>
+
+  <div style="max-width: 1100px; margin: 0 auto; padding: 0 20px;">
+    <div class="project-card proj-orange">
+      <h3>Contacts API &mdash; полноценный REST-сервис</h3>
+      <p class="proj-sub">
+        Переписываем Contact Book как Web API: Gin framework, SQLite база данных, JWT токены для аутентификации,
+        middleware для авторизации, валидация данных через go-playground/validator, soft delete, 7 эндпоинтов.
+      </p>
+
+      <div class="arch-diagram">
+        <pre>
+  <span class="hl-orange">go-contacts-app/</span>
+  |-- <span class="hl-cyan">cmd/</span>
+  |   +-- main.go                 <span class="hl-blue">// HTTP-сервер на Gin</span>
+  +-- <span class="hl-cyan">internal/</span>
+      |-- <span class="hl-cyan">contacts/</span>
+      |   |-- model.go            <span class="hl-blue">// Contact struct + tags</span>
+      |   |-- repository.go       <span class="hl-blue">// SQLite CRUD</span>
+      |   |-- service.go          <span class="hl-blue">// бизнес-логика</span>
+      |   +-- handler.go          <span class="hl-blue">// HTTP-обработчики</span>
+      |-- <span class="hl-cyan">auth/</span>
+      |   |-- model.go            <span class="hl-blue">// User struct</span>
+      |   |-- repository.go       <span class="hl-blue">// users table</span>
+      |   |-- service.go          <span class="hl-blue">// register + login</span>
+      |   |-- handler.go          <span class="hl-blue">// auth endpoints</span>
+      |   +-- jwt.go              <span class="hl-blue">// JWT service (HS256)</span>
+      +-- <span class="hl-cyan">middleware/</span>
+          +-- auth.go             <span class="hl-blue">// Bearer token middleware</span></pre>
+      </div>
+
+      <div class="two-col-grid">
+        <div>
+          <h4 style="font-size: 0.82rem; margin-bottom: 10px; color: var(--accent-orange);">Эндпоинты</h4>
+          <div style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.9; font-family: inherit;">
+            <code style="color: var(--accent-green); background: rgba(85,239,196,0.1); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem;">POST</code> /auth/register<br>
+            <code style="color: var(--accent-green); background: rgba(85,239,196,0.1); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem;">POST</code> /auth/login<br>
+            <code style="color: var(--accent-cyan); background: rgba(78,205,196,0.1); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem;">GET&nbsp;</code> /contacts<br>
+            <code style="color: var(--accent-cyan); background: rgba(78,205,196,0.1); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem;">GET&nbsp;</code> /contacts/:id<br>
+            <code style="color: var(--accent-green); background: rgba(85,239,196,0.1); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem;">POST</code> /contacts<br>
+            <code style="color: var(--accent-orange); background: rgba(247,164,76,0.1); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem;">PUT&nbsp;</code> /contacts/:id<br>
+            <code style="color: var(--accent-red); background: rgba(255,107,107,0.1); padding: 2px 6px; border-radius: 3px; font-size: 0.7rem;">DEL&nbsp;</code> /contacts/:id
+          </div>
+        </div>
+        <div>
+          <h4 style="font-size: 0.82rem; margin-bottom: 10px; color: var(--accent-yellow);">Технологии</h4>
+          <div style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.8;">
+            &gt; Gin HTTP Framework<br>
+            &gt; JWT (HS256) аутентификация<br>
+            &gt; SQLite + database/sql<br>
+            &gt; bcrypt хеширование паролей<br>
+            &gt; go-playground/validator<br>
+            &gt; godotenv конфигурация<br>
+            &gt; Owner-based авторизация
+          </div>
+        </div>
+      </div>
+
+      <div class="tags">
+        <span class="tag t-go">Go</span>
+        <span class="tag t-api">Gin</span>
+        <span class="tag t-api">JWT</span>
+        <span class="tag t-db">SQLite</span>
+        <span class="tag">REST API</span>
+        <span class="tag">bcrypt</span>
+        <span class="tag">Middleware</span>
+        <span class="tag">Soft Delete</span>
+        <span class="tag">Clean Architecture</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider wide"></div>
+
+<!-- ═══════════════ PHASE 4: MARKETPLACE ═══════════════ -->
+<section class="section reveal" id="marketplace">
+  <div class="phase-banner">
+    <div class="phase-label" style="background: rgba(232,67,147,0.15); color: var(--accent-pink); border: 1px solid rgba(232,67,147,0.3);">
+      Фаза 4 &mdash; Финал
+    </div>
+    <h2 style="background: linear-gradient(135deg, var(--accent-pink), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Marketplace Microservices
+    </h2>
+    <p>Финальный проект: распределённая e-commerce платформа из 4 микросервисов.
+    gRPC, RabbitMQ, Redis, PostgreSQL, MySQL, Prometheus, Grafana, Docker</p>
+  </div>
+
+  <div class="mp-stats">
+    <div class="mp-stat"><div class="mp-stat-value">4</div><div class="mp-stat-label">Микросервиса</div></div>
+    <div class="mp-stat"><div class="mp-stat-value">Go 1.25</div><div class="mp-stat-label">Язык</div></div>
+    <div class="mp-stat"><div class="mp-stat-value">6,056</div><div class="mp-stat-label">Строк кода</div></div>
+    <div class="mp-stat"><div class="mp-stat-value">74</div><div class="mp-stat-label">Go-файлов</div></div>
+    <div class="mp-stat"><div class="mp-stat-value">15</div><div class="mp-stat-label">Docker-сервисов</div></div>
+  </div>
+
+  <div class="mp-legend">
+    <div class="mp-legend-item"><div class="mp-legend-dot" style="background:var(--accent-green)"></div> REST API (HTTP)</div>
+    <div class="mp-legend-item"><div class="mp-legend-line" style="background:var(--accent-orange)"></div> gRPC (sync)</div>
+    <div class="mp-legend-item"><div class="mp-legend-line" style="background:var(--accent-pink); border-top: 2px dashed var(--accent-pink); height: 0;"></div> RabbitMQ (async)</div>
+    <div class="mp-legend-item"><div class="mp-legend-dot" style="background:var(--accent-blue)"></div> PostgreSQL</div>
+    <div class="mp-legend-item"><div class="mp-legend-dot" style="background:var(--accent-cyan)"></div> MySQL</div>
+    <div class="mp-legend-item"><div class="mp-legend-dot" style="background:var(--accent-red)"></div> Redis</div>
+  </div>
+
+  <!-- Application Services -->
+  <div class="mp-layer">
+    <div class="mp-layer-title">Application Services</div>
+    <div class="mp-row">
+      <div class="mp-service" style="--accent: var(--accent-blue);">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg, var(--accent-blue), var(--accent-cyan))"></div>
+        <div class="svc-icon">📦</div>
+        <h4>Catalog Service</h4>
+        <div class="svc-proto">REST API &mdash; Gin Framework</div>
+        <div>
+          <span class="svc-port" style="background:rgba(91,141,239,0.2);color:var(--accent-blue)">:9001</span>
+        </div>
+        <div class="svc-endpoints">
+          <code>GET /api/v1/catalog-items</code><br>
+          <code>GET /api/v1/brands</code><br>
+          <code>GET /api/v1/categories</code><br>
+          CRUD operations
+        </div>
+      </div>
+
+      <div class="mp-service">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg, var(--accent-green), var(--accent-cyan))"></div>
+        <div class="svc-icon">🛒</div>
+        <h4>Basket Service</h4>
+        <div class="svc-proto">REST API &mdash; Gin Framework</div>
+        <div>
+          <span class="svc-port" style="background:rgba(85,239,196,0.2);color:var(--accent-green)">:9002</span>
+        </div>
+        <div class="svc-endpoints">
+          <code>GET /cart</code> <code>POST /cart</code><br>
+          <code>POST /cart/checkout</code><br>
+          &rarr; gRPC &rarr; Promotion<br>
+          &rarr; Publish &rarr; RabbitMQ
+        </div>
+      </div>
+
+      <div class="mp-service">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg, var(--accent-orange), var(--accent-yellow))"></div>
+        <div class="svc-icon">🏷️</div>
+        <h4>Promotion Service</h4>
+        <div class="svc-proto">gRPC Server</div>
+        <div>
+          <span class="svc-port" style="background:rgba(247,164,76,0.2);color:var(--accent-orange)">:9003 gRPC</span>
+        </div>
+        <div class="svc-endpoints">
+          <code>GetPromoByCatalogItem</code><br>
+          <code>CreatePromo</code><br>
+          <code>UpdatePromo</code><br>
+          <code>DeletePromo</code>
+        </div>
+      </div>
+
+      <div class="mp-service">
+        <div style="position:absolute;top:0;left:0;right:0;height:3px;border-radius:12px 12px 0 0;background:linear-gradient(90deg, var(--accent-pink), var(--accent-purple))"></div>
+        <div class="svc-icon">💳</div>
+        <h4>Checkout Service</h4>
+        <div class="svc-proto">REST API &mdash; Gin Framework</div>
+        <div>
+          <span class="svc-port" style="background:rgba(232,67,147,0.2);color:var(--accent-pink)">:9004</span>
+        </div>
+        <div class="svc-endpoints">
+          <code>GET /orders/{id}</code><br>
+          <code>GET /orders/account/{name}</code><br>
+          &larr; Consume &larr; RabbitMQ
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Communication Layer -->
+  <div class="mp-layer">
+    <div class="mp-layer-title">Communication Layer</div>
+    <div class="mp-row">
+      <div class="mp-infra" style="border-color: var(--accent-orange);">
+        <div class="inf-icon">⚡</div>
+        <h4 style="color: var(--accent-orange)">gRPC</h4>
+        <div class="inf-detail">Basket &rarr; Promotion<br>Sync, Protobuf</div>
+      </div>
+      <div class="mp-infra" style="border-color: var(--accent-pink);">
+        <div class="inf-icon">🐰</div>
+        <h4 style="color: var(--accent-pink)">RabbitMQ</h4>
+        <div class="inf-detail">Basket &rarr; Checkout<br>Async, JSON events</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Data Layer -->
+  <div class="mp-layer">
+    <div class="mp-layer-title">Data Layer</div>
+    <div class="mp-row">
+      <div class="mp-infra" style="border-color: var(--accent-blue);">
+        <div class="inf-icon">🐘</div>
+        <h4>catalog-db</h4>
+        <div class="inf-detail">PostgreSQL 18.1</div>
+      </div>
+      <div class="mp-infra" style="border-color: var(--accent-blue);">
+        <div class="inf-icon">🐘</div>
+        <h4>basket-db</h4>
+        <div class="inf-detail">PostgreSQL 18.1</div>
+      </div>
+      <div class="mp-infra" style="border-color: var(--accent-red);">
+        <div class="inf-icon">⚡</div>
+        <h4>basket-cache</h4>
+        <div class="inf-detail">Redis 7</div>
+      </div>
+      <div class="mp-infra" style="border-color: var(--accent-cyan);">
+        <div class="inf-icon">🐬</div>
+        <h4>promotion-db</h4>
+        <div class="inf-detail">MySQL 8.0</div>
+      </div>
+      <div class="mp-infra" style="border-color: var(--accent-blue);">
+        <div class="inf-icon">🐘</div>
+        <h4>checkout-db</h4>
+        <div class="inf-detail">PostgreSQL 18.1</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Observability -->
+  <div class="mp-layer">
+    <div class="mp-layer-title">Observability & Operations</div>
+    <div class="mp-row">
+      <div class="mp-infra">
+        <div class="inf-icon">🔥</div>
+        <h4>Prometheus</h4>
+        <div class="inf-detail">Metrics :9090</div>
+      </div>
+      <div class="mp-infra">
+        <div class="inf-icon">📊</div>
+        <h4>Grafana</h4>
+        <div class="inf-detail">Dashboards :3000</div>
+      </div>
+      <div class="mp-infra">
+        <div class="inf-icon">📈</div>
+        <h4>k6</h4>
+        <div class="inf-detail">Load testing</div>
+      </div>
+      <div class="mp-infra">
+        <div class="inf-icon">🐳</div>
+        <h4>Portainer</h4>
+        <div class="inf-detail">Management :9000</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Communication Details -->
+  <div class="mp-comm-grid">
+    <div class="mp-comm-card">
+      <h4><span style="color:var(--accent-orange)">⚡</span> Synchronous: gRPC</h4>
+      <p>Basket Service вызывает Promotion Service через gRPC для получения скидок. Синхронный вызов при каждом запросе корзины. Protobuf / HTTP/2.</p>
+      <div class="mp-flow">
+        <div class="mp-flow-node" style="background:rgba(85,239,196,0.15);border:1px solid var(--accent-green);">🛒 Basket</div>
+        <div class="mp-flow-arrow">&rarr;<span class="mp-flow-arrow-label" style="color:var(--accent-orange)">gRPC</span></div>
+        <div class="mp-flow-node" style="background:rgba(247,164,76,0.15);border:1px solid var(--accent-orange);">🏷️ Promotion</div>
+      </div>
+    </div>
+
+    <div class="mp-comm-card">
+      <h4><span style="color:var(--accent-pink)">🐰</span> Asynchronous: RabbitMQ</h4>
+      <p>При checkout Basket публикует OrderSubmittedEvent. Checkout асинхронно потребляет событие и создаёт заказ. QoS: 1, Manual ACK.</p>
+      <div class="mp-flow">
+        <div class="mp-flow-node" style="background:rgba(85,239,196,0.15);border:1px solid var(--accent-green);">🛒 Basket</div>
+        <div class="mp-flow-arrow">&rarr;<span class="mp-flow-arrow-label" style="color:var(--accent-pink)">AMQP</span></div>
+        <div class="mp-flow-node" style="background:rgba(232,67,147,0.1);border:1px dashed var(--accent-pink);">🐰 RabbitMQ</div>
+        <div class="mp-flow-arrow">&rarr;<span class="mp-flow-arrow-label" style="color:var(--accent-pink)">consume</span></div>
+        <div class="mp-flow-node" style="background:rgba(232,67,147,0.15);border:1px solid var(--accent-pink);">💳 Checkout</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Patterns -->
+  <div style="margin-top: 30px;">
+    <div class="mp-layer-title">Architecture Patterns</div>
+    <div class="mp-patterns-grid">
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-blue);">🏗️ Clean Architecture</h5>
+        <p>Handler &rarr; Service &rarr; Repository. Чёткое разделение слоёв с инверсией зависимостей</p>
+      </div>
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-pink);">📨 CQRS</h5>
+        <p>Checkout Service: запись через RabbitMQ consumer, чтение через REST API</p>
+      </div>
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-orange);">📡 Event-Driven</h5>
+        <p>Асинхронная коммуникация между сервисами через события в RabbitMQ</p>
+      </div>
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-cyan);">🗄️ Repository Pattern</h5>
+        <p>Абстракция доступа к данным. Каждый сервис владеет своей БД</p>
+      </div>
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-green);">💉 Dependency Injection</h5>
+        <p>Конструкторная инъекция. Все зависимости передаются явно</p>
+      </div>
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-purple);">🔄 Retry & Resilience</h5>
+        <p>Reconnect к RabbitMQ и БД. Graceful shutdown с контекстами</p>
+      </div>
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-pink);">🐳 Multi-stage Builds</h5>
+        <p>Dockerfile: builder (Go compile) &rarr; scratch (minimal image)</p>
+      </div>
+      <div class="mp-pattern">
+        <h5 style="color: var(--accent-red);">🔗 Multi-layer Caching</h5>
+        <p>Redis &rarr; PostgreSQL. TTL-based invalidation для корзин</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tags" style="margin-top: 24px; justify-content: center;">
+    <span class="tag t-go">Go</span>
+    <span class="tag t-micro">gRPC</span>
+    <span class="tag t-micro">RabbitMQ</span>
+    <span class="tag t-db">PostgreSQL</span>
+    <span class="tag t-db">MySQL</span>
+    <span class="tag" style="color: var(--accent-red); border-color: rgba(255,107,107,0.3);">Redis</span>
+    <span class="tag t-micro">Protobuf</span>
+    <span class="tag" style="color: var(--accent-purple); border-color: rgba(162,155,254,0.3);">Prometheus</span>
+    <span class="tag" style="color: var(--accent-purple); border-color: rgba(162,155,254,0.3);">Grafana</span>
+    <span class="tag t-micro">Docker</span>
+    <span class="tag">CQRS</span>
+    <span class="tag">Clean Architecture</span>
+    <span class="tag">k6 Load Testing</span>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ BOOK / DOCS ═══════════════ -->
+<section class="section reveal" id="book">
+  <div class="section-header">
+    <h2 style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Конспекты и справочник
+    </h2>
+    <p class="section-sub">Подробная текстовая документация к каждому дню курса: теория, примеры, задачи. Используйте как справочник параллельно с видео или для повторения</p>
+  </div>
+
+  <div class="docs-grid">
+    <div class="doc-item">
+      <h4 style="color: var(--accent-blue);">Типы и переменные</h4>
+      <p>int, float, bool, string, byte, rune, scope, memory, zero values, naming</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-cyan);">Выражения и константы</h4>
+      <p>Арифметика, побитовые операции, fmt, форматирование, const, iota</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-green);">Условия и логика</h4>
+      <p>if/else, comparison, logical ops, short-circuit, switch, init-in-if</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-orange);">Циклы</h4>
+      <p>for, while-pattern, range, break/continue, PRNG, crypto/rand</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-pink);">Массивы</h4>
+      <p>Declaration, 2D-arrays, boundaries, iteration, copying, practical tasks</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-purple);">Слайсы</h4>
+      <p>make, len/cap, nil vs empty, append, copy, multi-dimensional</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-red);">Строки</h4>
+      <p>UTF-8, runes, concatenation, conversion, escape, strings.Builder</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-yellow);">Указатели и ввод</h4>
+      <p>Pointers, stack/heap, scope, bufio.Scanner, input methods</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-cyan);">Коллекции</h4>
+      <p>Maps, sets, make, delete, comma ok, ordered iteration</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-green);">Функции</h4>
+      <p>Parameters, returns, variadic, closures, higher-order, recursion</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-orange);">Ошибки</h4>
+      <p>error interface, errors.Is, wrap, panic, defer, recover, re-panic</p>
+    </div>
+    <div class="doc-item">
+      <h4 style="color: var(--accent-pink);">Файлы и время</h4>
+      <p>os, bufio, io, time.Now, formatting, parsing, Duration</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ TECH STACK EVOLUTION ═══════════════ -->
+<section class="section reveal" id="stack">
+  <div class="section-header">
+    <h2 style="background: linear-gradient(135deg, var(--accent-cyan), var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+      Эволюция стека технологий
+    </h2>
+    <p class="section-sub">От fmt.Println до distributed systems &mdash; как растёт ваш инструментарий</p>
+  </div>
+
+  <div class="evolution">
+    <div class="evo-step" style="border-top: 3px solid var(--accent-blue);">
+      <h4 style="color: var(--accent-blue);">Фаза 1: Основы</h4>
+      <ul>
+        <li>Go stdlib</li>
+        <li>fmt, math, time</li>
+        <li>os, bufio, io</li>
+        <li>encoding/json</li>
+        <li>math/rand, crypto/rand</li>
+        <li>sync (Mutex, WaitGroup)</li>
+      </ul>
+    </div>
+    <div class="evo-arrow">&rarr;</div>
+    <div class="evo-step" style="border-top: 3px solid var(--accent-green);">
+      <h4 style="color: var(--accent-green);">Фаза 2: CLI</h4>
+      <ul>
+        <li>JSON file storage</li>
+        <li>Domain-Driven Design</li>
+        <li>Repository pattern</li>
+        <li>CLI interface</li>
+        <li>Atomic file writes</li>
+        <li>Error handling patterns</li>
+      </ul>
+    </div>
+    <div class="evo-arrow">&rarr;</div>
+    <div class="evo-step" style="border-top: 3px solid var(--accent-orange);">
+      <h4 style="color: var(--accent-orange);">Фаза 3: Web API</h4>
+      <ul>
+        <li>Gin framework</li>
+        <li>JWT (HS256) auth</li>
+        <li>SQLite + SQL</li>
+        <li>bcrypt hashing</li>
+        <li>Middleware chain</li>
+        <li>Input validation</li>
+        <li>Soft delete</li>
+        <li>godotenv config</li>
+      </ul>
+    </div>
+    <div class="evo-arrow">&rarr;</div>
+    <div class="evo-step" style="border-top: 3px solid var(--accent-pink);">
+      <h4 style="color: var(--accent-pink);">Фаза 4: Микросервисы</h4>
+      <ul>
+        <li>gRPC / Protobuf</li>
+        <li>RabbitMQ (AMQP)</li>
+        <li>PostgreSQL + MySQL</li>
+        <li>Redis caching</li>
+        <li>Prometheus + Grafana</li>
+        <li>CQRS, DDD, Clean Arch</li>
+        <li>Docker / Portainer</li>
+        <li>k6 load testing</li>
+        <li>74 Go files, 6000+ LOC</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════ LEARNING PATH SUMMARY ═══════════════ -->
+<section class="section reveal">
+  <div class="section-header">
+    <h2>Путь обучения</h2>
+    <p class="section-sub">Четыре фазы с нарастающей сложностью. Каждая фаза строится на предыдущей</p>
+  </div>
+
+  <div class="journey">
+    <div class="journey-card" style="border-left: 3px solid var(--accent-blue);">
+      <h3 style="color: var(--accent-blue);">Фаза 1 &mdash; Основы</h3>
+      <p>
+        <strong style="color: var(--text);">14 дней, 86+ упражнений</strong><br>
+        Типы, переменные, условия, циклы, коллекции, функции, структуры, интерфейсы,
+        конкурентность, SOLID, паттерны
+      </p>
+    </div>
+    <div class="journey-card" style="border-left: 3px solid var(--accent-green);">
+      <h3 style="color: var(--accent-green);">Фаза 2 &mdash; CLI</h3>
+      <p>
+        <strong style="color: var(--text);">Contact Book (25 уроков)</strong><br>
+        Консольное приложение с JSON-хранилищем, доменной моделью, связями, поиском и тегами
+      </p>
+    </div>
+    <div class="journey-card" style="border-left: 3px solid var(--accent-orange);">
+      <h3 style="color: var(--accent-orange);">Фаза 3 &mdash; Web API</h3>
+      <p>
+        <strong style="color: var(--text);">Contacts REST API (29 уроков)</strong><br>
+        Gin, JWT, SQLite, CRUD, middleware, авторизация, валидация, 7 эндпоинтов
+      </p>
+    </div>
+    <div class="journey-card" style="border-left: 3px solid var(--accent-pink);">
+      <h3 style="color: var(--accent-pink);">Фаза 4 &mdash; Микросервисы</h3>
+      <p>
+        <strong style="color: var(--text);">Marketplace (6000+ LOC)</strong><br>
+        4 сервиса, gRPC, RabbitMQ, PostgreSQL, MySQL, Redis, Prometheus, Grafana, Docker
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ CTA BANNER ═══════════════ -->
+<div class="divider"></div>
+<section class="cta-banner reveal">
+  <h2>Готовы начать путь в Go?</h2>
+  <p>Присоединяйтесь к курсу и пройдите путь от первой строчки кода до production-ready микросервисов.</p>
+  <a href="https://stepik.org/a/266408/pay?promo=dd9370c9066886a3&utm_source=landing&utm_medium=bottom_banner&utm_campaign=go_master_course" class="btn btn-enroll" target="_blank" rel="noopener">Записаться на курс</a>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<div class="divider"></div>
+<footer class="footer">
+  <div class="footer-logo">Go Master Course</div>
+  <div>От Hello World до Microservices</div>
+  <div class="footer-sub" style="margin-top: 14px; font-size: 0.7rem;">
+    300+ уроков &middot; 50+ часов видео &middot; 261 тест &middot; 45 интерактивных задач &middot; 3 проекта
+  </div>
+</footer>
+
+<script>
+// ── Navbar scroll shadow ──
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 10);
+});
+
+// ── Mobile menu toggle ──
+const navToggle = document.getElementById('navToggle');
+const navLinks = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  navToggle.textContent = navLinks.classList.contains('open') ? '\u2715' : '\u2630';
+});
+// Close menu on link click
+navLinks.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('open');
+    navToggle.textContent = '\u2630';
+  });
+});
+// Close menu on outside click
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.nav')) {
+    navLinks.classList.remove('open');
+    navToggle.textContent = '\u2630';
+  }
+});
+
+// ── Reveal on scroll ──
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Staggered reveal for marketplace cards ──
+const staggerObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const cards = entry.target.querySelectorAll('.mp-service, .mp-infra, .mp-pattern');
+      cards.forEach((card, i) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        setTimeout(() => {
+          card.style.transition = 'opacity 0.4s ease-out, transform 0.4s ease-out';
+          card.style.opacity = '1';
+          card.style.transform = 'translateY(0)';
+        }, i * 60);
+      });
+      staggerObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.mp-layer, .mp-patterns-grid').forEach(el => staggerObserver.observe(el));
+</script>
+
+</body>
+</html>
